@@ -1,0 +1,230 @@
+:root{
+  --bg:#05060a;
+  --surface:#111218;
+  --charcoal:#121217;
+  --mars:#8a2f2f;
+  --mars2:#b95530;
+  --info:#00ffd1;
+  --muted:#9aa1a8;
+  --glass: rgba(255,255,255,0.04);
+  --glass-2: rgba(255,255,255,0.02);
+  --accent-glow: 0 6px 30px rgba(0,255,209,0.06);
+  --radius:12px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: dark;
+  --max-width:1200px;
+}
+
+/* Basic page */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(255,60,40,0.03), transparent 10%),
+              radial-gradient(900px 400px at 85% 80%, rgba(20,120,160,0.015), transparent 10%),
+              var(--bg);
+  color: #fff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* Loading screen */
+.loading-screen{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg);
+  z-index:999;
+}
+.loading-card{
+  text-align:center;
+  padding:40px;
+  border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+  border:1px solid rgba(255,255,255,0.02);
+}
+.loading-eyebrow{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.loading-lines{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted);margin-bottom:16px}
+.loading-progress{font-size:14px;color:var(--info);animation:pulse 2s infinite}
+
+/* Topbar */
+.topbar{
+  position:fixed;
+  left:0;right:0;top:0;
+  height:72px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:10px 18px;
+  z-index:50;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 60%);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+.logo{cursor:pointer; display:flex;flex-direction:column}
+.logo-title{font-weight:700;letter-spacing:1px}
+.logo-sub{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px}
+.nav{margin-left:20px}
+.nav-list{display:flex;gap:8px;list-style:none;margin:0;padding:0}
+.nav-link{background:transparent;border:0;color:inherit;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+.nav-link.active{box-shadow:var(--accent-glow);background:linear-gradient(90deg, rgba(0,255,209,0.02), rgba(255,70,50,0.01));border:1px solid rgba(255,255,255,0.03)}
+.status-indicator{margin-left:auto;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);font-size:13px}
+.status-dot{width:9px;height:9px;border-radius:50%;background:var(--info);box-shadow:0 0 10px rgba(0,255,209,0.18), 0 0 2px rgba(0,255,209,0.4);animation:pulse 2s infinite}
+@keyframes pulse{0%{transform:scale(0.85);opacity:0.8}50%{transform:scale(1);opacity:1}100%{transform:scale(0.85);opacity:0.8}}
+.menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px;border-radius:8px;color:var(--muted)}
+
+/* Main pages */
+.main{padding-top:92px;max-width:var(--max-width);margin:0 auto}
+.page{display:none;padding:28px 20px}
+.page--active{display:block}
+.hero{display:flex;gap:22px;align-items:stretch;padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));box-shadow: 0 6px 30px rgba(0,0,0,0.6)}
+.hero-left{flex:1;min-width:280px}
+.hero-right{width:460px;display:flex;flex-direction:column;gap:12px;align-items:center}
+.eyebrow{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:2px}
+.hero-title{font-family: "Orbitron", Inter, sans-serif;font-weight:700;font-size:44px;margin:8px 0}
+.hero-title.large{font-size:48px}
+.hero-sub{color:var(--muted);margin:6px 0 18px 0}
+.hero-cta-row{display:flex;gap:10px;align-items:center;margin-top:12px}
+.btn{cursor:pointer;padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.btn.primary{background:linear-gradient(90deg, rgba(0,255,209,0.07), rgba(255,100,80,0.03));border:1px solid rgba(0,255,209,0.12)}
+.btn.small{padding:6px 8px;font-size:13px}
+.btn.subtle{background:transparent;border:1px dashed rgba(255,255,255,0.03)}
+
+/* Stat cards */
+.mission-cards{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.stat-card{background:var(--glass);padding:10px;border-radius:10px;min-width:110px;border:1px solid rgba(255,255,255,0.02);backdrop-filter: blur(6px)}
+.stat-card .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.stat-card .value{font-weight:700;font-size:18px;margin-top:6px}
+
+/* Planet canvas */
+.planet-canvas-wrap{position:relative;width:420px;height:420px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03);overflow:hidden}
+#mars-canvas{display:block;max-width:100%;height:auto;transform:translateZ(0)}
+.earth-dot{position:absolute;right:14px;top:18px;width:8px;height:8px;border-radius:50%;background:rgba(100,170,255,0.85);box-shadow:0 0 8px rgba(100,170,255,0.12)}
+
+/* Countdown */
+.countdown-card{background:var(--glass);padding:12px;border-radius:8px;text-align:center;border:1px solid rgba(255,255,255,0.02);width:320px}
+.countdown{font-family:var(--mono);font-size:20px;letter-spacing:2px;margin-top:6px}
+.countdown-note{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* Trajectory */
+.trajectory{margin-top:22px}
+.trajectory-title{font-size:13px;color:var(--muted);text-transform:uppercase}
+.trajectory-visual{position:relative;margin-top:8px;background:linear-gradient(180deg, rgba(255,255,255,0.005), transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+.traj-stages{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:space-between;padding:0 20px}
+.stage{background:transparent;color:var(--muted);border:0;cursor:pointer}
+
+/* Story & timeline */
+.story{margin-top:20px}
+.story-section{padding:18px;border-radius:10px;margin-bottom:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
+.timeline{margin-top:12px;padding:12px;border-radius:10px;background:var(--glass-2);border:1px solid rgba(255,255,255,0.02)}
+.timeline-items{display:flex;gap:14px;flex-wrap:wrap}
+.node{padding:8px 12px;background:rgba(0,255,209,0.05);border:1px solid rgba(0,255,209,0.1);border-radius:6px;font-size:13px}
+
+/* Explorer layout */
+.explorer-grid{display:grid;grid-template-columns:1fr 320px;gap:14px;margin-top:14px}
+.visualization{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+.visual-toolbar{display:flex;gap:8px;margin-bottom:12px}
+.panel{background:var(--glass);border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.02)}
+.panel-header{display:flex;flex-direction:column;gap:6px}
+.panel-body{margin-top:8px}
+.data-panel .s-label{font-size:12px;color:var(--muted);text-transform:uppercase}
+.stat-row{display:flex;gap:12px;margin-top:8px}
+.stat{flex:1;background:transparent;padding:8px;border-radius:8px}
+.meta{margin-bottom:6px;font-size:13px}
+
+/* Mars canvas marker layer */
+.mars-surface-wrap{position:relative}
+#mars-planet{width:100%;height:auto;border-radius:6px}
+.markers-layer{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+.marker{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;border-radius:50%;width:14px;height:14px;background:linear-gradient(180deg,#ff8b6b,#ff3b3b);box-shadow:0 6px 18px rgba(255,80,70,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.marker:focus{outline:2px solid var(--info);outline-offset:4px}
+.marker .pulse{width:100%;height:100%;border-radius:50%;box-shadow:0 0 18px rgba(255,80,70,0.14);animation:markerPulse 2.6s infinite}
+@keyframes markerPulse{0%{transform:scale(0.9);opacity:0.9}50%{transform:scale(1.15);opacity:1}100%{transform:scale(0.9);opacity:0.9}}
+
+/* Rover */
+.rover-section{margin-top:16px}
+.rover-panel{display:flex;flex-direction:column}
+.rover-body{display:flex;flex-direction:column;gap:10px}
+.telemetry div{margin-bottom:6px}
+.telemetry progress{width:100%}
+.rover-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.mission-log{background:rgba(0,0,0,0.2);padding:8px;border-radius:8px;max-height:140px;overflow:auto}
+.log-lines{white-space:pre-wrap;margin:0;font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+/* Colony page */
+.colony-grid{display:grid;grid-template-columns:1fr 320px 260px;gap:14px;margin-top:16px}
+.colony-visual{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+.colony-map{height:260px;background:linear-gradient(180deg,#081018, #0b0d14);border-radius:10px;position:relative;overflow:hidden;box-shadow:inset 0 3px 20px rgba(0,0,0,0.6)}
+.colony-controls{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.colony-controls label{font-size:12px;color:var(--muted);text-transform:uppercase}
+.colony-controls input, .colony-controls select{width:100%;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);background:rgba(0,0,0,0.2);color:inherit}
+.control-actions{display:flex;gap:8px;margin-top:8px}
+.gauge{display:flex;align-items:center;gap:12px;position:relative}
+.gauge-center{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);text-align:center;z-index:2}
+#gauge-arc{stroke-dasharray:320;stroke-dashoffset:80;transition:stroke-dashoffset 600ms ease}
+.components{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.comp{display:flex;align-items:center;gap:8px}
+.comp-name{font-size:11px;min-width:60px;text-transform:uppercase}
+.comp progress{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,0.1)}
+
+.readiness-panel, .events-panel, .weather-panel, .gravity-panel{
+  grid-column:auto;
+}
+
+.weather-stat, .result-row{margin-bottom:8px;font-size:13px}
+.explain{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* Footer */
+.site-footer{display:flex;justify-content:space-between;align-items:center;padding:16px;max-width:var(--max-width);margin:26px auto 36px;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+.footer-left{display:flex;align-items:center;gap:16px}
+.footer-links{display:flex;gap:16px;align-items:center}
+.footer-links a{color:var(--info);text-decoration:none;font-size:13px}
+.status-mini{font-size:12px}
+
+/* AI console */
+.ai-console{position:fixed;right:18px;bottom:18px;width:360px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));border-radius:12px;padding:8px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 40px rgba(0,0,0,0.6);z-index:70}
+.ai-header{display:flex;justify-content:space-between;align-items:center;padding:8px}
+.ai-body{padding:8px}
+.ai-log{height:160px;overflow:auto;padding:8px;border-radius:8px;background:rgba(0,0,0,0.25);font-family:var(--mono);font-size:13px;color:var(--muted)}
+.ai-form{display:flex;gap:8px;margin-top:8px}
+.ai-form input{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit}
+.ai-form button{padding:8px 12px}
+
+/* Monospace small */
+.monospace{font-family:var(--mono)}
+.small{font-size:13px}
+.muted{color:var(--muted)}
+
+/* Accessibility focus */
+:focus{outline:3px solid rgba(0,255,209,0.12);outline-offset:3px}
+
+/* Responsive */
+@media (max-width:1000px){
+  .explorer-grid{grid-template-columns:1fr}
+  .colony-grid{grid-template-columns:1fr 1fr}
+  .planet-canvas-wrap{width:320px;height:320px}
+  .hero-right{width:340px}
+}
+@media (max-width:640px){
+  .topbar{height:64px}
+  .nav-list{display:none}
+  .menu-toggle{display:block;margin-left:auto}
+  .hero{flex-direction:column}
+  .planet-canvas-wrap{width:260px;height:260px}
+  .hero-title{font-size:28px}
+  .explorer-grid{grid-template-columns:1fr}
+  .colony-grid{grid-template-columns:1fr}
+  .ai-console{right:10px;left:10px;width:auto}
+  .status-dot{display:none}
+  .mission-cards{justify-content:space-between}
+  .hero-right{width:100%}
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce){
+  :root{ --reduced:1 }
+  .status-dot, .marker .pulse, .nav-link.active, #gauge-arc { animation: none !important; transition: none !important; }
+  body.reduced-motion-on *{animation-duration:0 !important; animation-iteration-count:1 !important; transition: none !important}
+}
