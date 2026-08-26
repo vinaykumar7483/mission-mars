@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MISSION MARS — Humanity's Next Giant Leap</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Mission Mars — interactive mission control, explorer and colony simulation. Educational conceptual simulation." />
+</head>
+<body class="reduced-motion-off">
+  <!-- Loading screen -->
+  <div id="loading" class="loading-screen" aria-hidden="false">
+    <div class="loading-card" role="status" aria-live="polite">
+      <div class="loading-eyebrow">INITIALIZING MISSION SYSTEM</div>
+      <div class="loading-lines">
+        <div>LOADING TELEMETRY</div>
+        <div>CALIBRATING NAVIGATION</div>
+      </div>
+      <div id="loading-progress" class="loading-progress">MISSION SYSTEM ONLINE</div>
+    </div>
+  </div>
+
+  <header class="topbar" role="banner">
+    <div class="logo" id="logo" tabindex="0" aria-label="Mission Mars home">
+      <span class="logo-title">MISSION MARS</span>
+      <small class="logo-sub">Humanity's Next Giant Leap</small>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Primary">
+      <ul class="nav-list" id="nav-list">
+        <li><button class="nav-link active" data-target="page-mission" aria-current="page">MISSION</button></li>
+        <li><button class="nav-link" data-target="page-explorer">EXPLORE</button></li>
+        <li><button class="nav-link" data-target="page-colony">COLONY 2050</button></li>
+      </ul>
+    </nav>
+
+    <div class="status-indicator" id="mission-status" aria-live="polite">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span class="status-text">MISSION ONLINE</span>
+    </div>
+
+    <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Open navigation">☰</button>
+  </header>
+
+  <main class="main" role="main">
+    <!-- PAGE 1: MISSION CONTROL -->
+    <section id="page-mission" class="page page--active" tabindex="-1" aria-labelledby="mission-title">
+      <div class="hero hero--mission">
+        <div class="hero-left">
+          <div class="eyebrow">MISSION // 01</div>
+          <h1 id="mission-title" class="hero-title">MISSION MARS</h1>
+          <p class="hero-sub">Humanity's Next Giant Leap</p>
+          <div class="hero-cta-row">
+            <button id="begin-explore" class="btn primary">BEGIN MARS EXPLORATION</button>
+            <button id="open-ai-1" class="btn subtle">MISSION AI</button>
+          </div>
+          <div class="mission-cards" aria-hidden="false">
+            <div class="stat-card" data-animate>
+              <div class="label">MISSION STATUS</div>
+              <div class="value">READY</div>
+            </div>
+            <div class="stat-card" data-animate>
+              <div class="label">CREW</div>
+              <div class="value">06</div>
+            </div>
+            <div class="stat-card" data-animate>
+              <div class="label">MISSION DURATION</div>
+              <div class="value">~7 MONTHS</div>
+            </div>
+            <div class="stat-card" data-animate>
+              <div class="label">DESTINATION</div>
+              <div class="value">MARS</div>
+            </div>
+            <div class="stat-card" data-animate>
+              <div class="label">DISTANCE</div>
+              <div class="value">225M KM</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="planet-canvas-wrap" id="planet-wrap" aria-hidden="false">
+            <canvas id="mars-canvas" width="680" height="680" aria-label="Interactive Mars visual"></canvas>
+            <div class="earth-dot" title="Earth (distant)"></div>
+            <div class="orbit-lines" aria-hidden="true"></div>
+          </div>
+
+          <div class="countdown-card">
+            <div class="label">LAUNCH IN</div>
+            <div id="countdown" class="countdown" aria-live="polite">-- : -- : -- : --</div>
+            <div class="countdown-note">Target window configurable in README</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trajectory -->
+      <div class="trajectory" aria-hidden="false">
+        <div class="trajectory-title">MISSION TRAJECTORY</div>
+        <div class="trajectory-visual" id="trajectory-visual" role="img" aria-label="Earth to Mars trajectory">
+          <svg viewBox="0 0 800 140" preserveAspectRatio="xMidYMid meet">
+            <path id="traj-line" d="M40 70 C200 10, 600 10, 760 70" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none"/>
+            <circle id="spacecraft" r="6" fill="#00ffd1" />
+          </svg>
+          <div class="traj-stages">
+            <button class="stage" data-stage="EARTH">EARTH</button>
+            <button class="stage" data-stage="LAUNCH">LAUNCH</button>
+            <button class="stage" data-stage="DEEP_SPACE">DEEP SPACE</button>
+            <button class="stage" data-stage="MARS_ORBIT">MARS ORBIT</button>
+            <button class="stage" data-stage="SURFACE">SURFACE</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story sections -->
+      <article class="story" id="story">
+        <section class="story-section" id="why-mars">
+          <h2 class="eyebrow">01 // WHY MARS?</h2>
+          <p>Mars is a near-term target for exploration and a compelling candidate for long-term human presence due to accessible polar ice, diverse geology, and the opportunity to advance human spaceflight systems.</p>
+        </section>
+
+        <section class="story-section" id="the-journey">
+          <h2 class="eyebrow">02 // THE JOURNEY</h2>
+          <p>Earth-to-Mars travel requires careful trajectory planning, radiation mitigation, life-support systems, and reliable propulsion.</p>
+        </section>
+
+        <section class="story-section" id="the-challenge">
+          <h2 class="eyebrow">03 // THE CHALLENGE</h2>
+          <p>Low pressure, extreme cold, radiation, and resource scarcity make Mars a hard environment; engineering resilience is key.</p>
+        </section>
+
+        <section class="story-section" id="the-future">
+          <h2 class="eyebrow">04 // THE FUTURE</h2>
+          <p>Long-term habitation requires closed-loop systems, energy resilience, and adaptable habitats—this project explores conceptual futures toward 2050.</p>
+        </section>
+      </article>
+
+      <!-- Timeline -->
+      <section class="timeline" aria-label="Mission timeline">
+        <div class="timeline-title">FUTURE MISSION TIMELINE</div>
+        <div class="timeline-items">
+          <div class="node">2026 — MISSION PREPARATION</div>
+          <div class="node">2030 — ROBOTIC EXPLORATION</div>
+          <div class="node">2035 — CREWED ORBITAL MISSIONS</div>
+          <div class="node">2040 — FIRST LONG-DURATION HABITATS</div>
+          <div class="node">2050 — PERMANENT SETTLEMENT</div>
+        </div>
+      </section>
+
+      <div class="page-end-cta">
+        <button class="btn primary" id="to-explorer-cta">BEGIN MARS EXPLORATION</button>
+      </div>
+    </section>
+
+    <!-- PAGE 2: MARS EXPLORER -->
+    <section id="page-explorer" class="page" tabindex="-1" aria-labelledby="explorer-title">
+      <div class="hero hero--explorer">
+        <div class="eyebrow">EXPLORE // 02</div>
+        <h2 id="explorer-title" class="hero-title large">MARS EXPLORER</h2>
+        <p class="hero-sub">Rotate. Zoom. Investigate.</p>
+        <div class="explorer-grid">
+          <div class="visualization" id="mars-visualization" aria-label="Mars interactive">
+            <div class="visual-toolbar">
+              <button id="reset-view" class="btn small">Reset View</button>
+              <button id="toggle-markers" class="btn small">Toggle Markers</button>
+              <div class="zoom-display" id="zoom-display">1.0x</div>
+            </div>
+            <div class="mars-surface-wrap" id="mars-wrap">
+              <canvas id="mars-planet" width="720" height="520" aria-label="Mars globe"></canvas>
+              <div id="markers-layer" class="markers-layer" role="list"></div>
+            </div>
+          </div>
+
+          <aside class="panel" id="location-panel" aria-live="polite">
+            <div class="panel-header">
+              <div class="label">LOCATION // <span id="loc-index">—</span></div>
+              <h3 id="loc-name">Select a location</h3>
+            </div>
+            <div id="loc-details" class="panel-body">
+              <div class="meta"><strong>TYPE</strong> <span id="loc-type">—</span></div>
+              <div class="meta"><strong>HEIGHT</strong> <span id="loc-height">—</span></div>
+              <div class="meta"><strong>STATUS</strong> <span id="loc-status">—</span></div>
+              <div class="meta"><strong>COORDINATES</strong> <span id="loc-coords">—</span></div>
+              <div class="meta"><strong>PRIORITY</strong> <span id="loc-priority">—</span></div>
+              <p id="loc-desc">Click a marker to view details</p>
+
+              <div class="panel-actions">
+                <button id="view-location" class="btn primary">VIEW LOCATION</button>
+              </div>
+            </div>
+          </aside>
+
+          <div class="panel data-panel" id="data-dashboard" aria-label="Planetary data dashboard">
+            <div class="panel-header"><div class="label">PLANETARY DATA</div><h4>MARS STATS</h4></div>
+            <div class="panel-body">
+              <div class="stat-row">
+                <div class="stat"><div class="s-label">Avg Temp</div><div class="s-value" id="stat-temp">-60 °C</div></div>
+                <div class="stat"><div class="s-label">Gravity</div><div class="s-value" id="stat-grav">3.71 m/s²</div></div>
+                <div class="stat"><div class="s-label">Pressure</div><div class="s-value" id="stat-press">0.6 kPa</div></div>
+              </div>
+              <div class="stat-row">
+                <div class="stat"><div class="s-label">Composition</div><div class="s-value">CO₂ 95.3%</div></div>
+                <div class="stat"><div class="s-label">Day Length</div><div class="s-value">24h 39m</div></div>
+                <div class="stat"><div class="s-label">Year Length</div><div class="s-value">687 days</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel weather-panel" id="weather-panel" aria-live="polite">
+            <div class="panel-header"><div class="label">SIMULATION</div><h4>MARS WEATHER</h4></div>
+            <div class="panel-body">
+              <div class="weather-stat"><strong>Temperature</strong> <span id="weather-temp">-63 °C</span></div>
+              <div class="weather-stat"><strong>Wind</strong> <span id="weather-wind">8 m/s</span></div>
+              <div class="weather-stat"><strong>Dust</strong> <span id="weather-dust">Low</span></div>
+              <div class="weather-stat"><strong>Visibility</strong> <span id="weather-vis">Good</span></div>
+            </div>
+          </div>
+
+          <div class="panel gravity-panel" id="gravity-panel" aria-label="Gravity simulator">
+            <div class="panel-header"><div class="label">SIMULATION</div><h4>GRAVITY SIMULATOR</h4></div>
+            <div class="panel-body">
+              <label for="earth-weight">Earth Weight (kg)</label>
+              <input id="earth-weight" type="number" min="1" value="70" />
+              <div class="result-row">
+                <div class="result"><strong>MARS</strong><div id="mars-weight">26.6 kg</div></div>
+                <div class="explain">Mass unchanged — apparent weight changes due to gravity difference.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="rover-section">
+          <div class="rover-panel">
+            <div class="panel-header"><div class="label">ROVER</div><h4>FIELD TELEMETRY</h4></div>
+            <div class="panel-body rover-body">
+              <div class="telemetry">
+                <div><strong>BATTERY</strong> <progress id="rover-batt" max="100" value="84"></progress> <span id="rover-batt-val">84%</span></div>
+                <div><strong>TEMP</strong> <span id="rover-temp">-25 °C</span></div>
+                <div><strong>DIST</strong> <span id="rover-dist">1.2 km</span></div>
+                <div><strong>SIGNAL</strong> <span id="rover-signal">GOOD</span></div>
+              </div>
+
+              <div class="rover-controls">
+                <button class="btn small" data-cmd="MOVE">MOVE</button>
+                <button class="btn small" data-cmd="SCAN">SCAN</button>
+                <button class="btn small" data-cmd="SAMPLE">SAMPLE</button>
+                <button class="btn small" data-cmd="PHOTO">PHOTO</button>
+                <button class="btn small" data-cmd="RETURN">RETURN</button>
+              </div>
+
+              <div class="mission-log" id="mission-log" aria-live="polite" tabindex="0">
+                <pre id="log-lines" class="log-lines monospace">
+08:42:12  ROCKET STAGE READY
+08:43:51  ROVER SIGNAL ACQUIRED
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PAGE 3: COLONY 2050 -->
+    <section id="page-colony" class="page" tabindex="-1" aria-labelledby="colony-title">
+      <div class="hero hero--colony">
+        <div class="eyebrow">COLONY // 03</div>
+        <h2 id="colony-title" class="hero-title large">COLONY 2050</h2>
+        <p class="hero-sub">BUILD THE FUTURE</p>
+
+        <div class="colony-grid">
+          <div class="colony-visual" id="colony-visual">
+            <div class="colony-map" id="colony-map" aria-hidden="false">
+              <!-- visual modules rendered by JS -->
+            </div>
+            <div class="colony-controls" id="colony-controls">
+              <label>Population <span id="pop-val">200</span></label>
+              <input id="pop-slider" type="range" min="50" max="1000" value="200" />
+              <label>Energy</label>
+              <select id="energy-select"><option>SOLAR</option><option>NUCLEAR</option><option>HYBRID</option></select>
+              <label>Food</label>
+              <select id="food-select"><option>HYDROPONICS</option><option>LAB-GROWN</option><option>COMBINATION</option></select>
+              <label>Water</label>
+              <select id="water-select"><option>ICE EXTRACTION</option><option>RECYCLED</option><option>HYBRID</option></select>
+              <label>Habitat</label>
+              <select id="hab-select"><option>BASIC</option><option>ADVANCED</option><option>MODULAR</option></select>
+
+              <div class="control-actions">
+                <button id="simulate-event" class="btn subtle">SIMULATE DUST STORM</button>
+                <button id="reset-colony" class="btn small">RESET</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel readiness-panel" id="readiness-panel" aria-live="polite">
+            <div class="panel-header"><div class="label">COLONY</div><h4>READINESS SCORE</h4></div>
+            <div class="panel-body">
+              <div id="readiness-gauge" class="gauge" role="img" aria-label="Readiness score visualization">
+                <svg viewBox="0 0 200 100">
+                  <defs><linearGradient id="g1"><stop offset="0%" stop-color="#ff6f5b"/><stop offset="100%" stop-color="#00ffd1"/></linearGradient></defs>
+                  <path d="M20,80 A80,80 0 0 1 180,80" stroke="rgba(255,255,255,0.08)" stroke-width="16" fill="none"/>
+                  <path id="gauge-arc" d="M20,80 A80,80 0 0 1 180,80" stroke="url(#g1)" stroke-width="12" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="gauge-center"><div id="readiness-value">87%</div><div class="small muted">COLONY READINESS</div></div>
+              </div>
+
+              <div class="components">
+                <div class="comp"><div class="comp-name">ENERGY</div><progress id="comp-energy" max="100" value="90"></progress></div>
+                <div class="comp"><div class="comp-name">FOOD</div><progress id="comp-food" max="100" value="75"></progress></div>
+                <div class="comp"><div class="comp-name">WATER</div><progress id="comp-water" max="100" value="80"></progress></div>
+                <div class="comp"><div class="comp-name">HABITAT</div><progress id="comp-hab" max="100" value="70"></progress></div>
+                <div class="comp"><div class="comp-name">RESILIENCE</div><progress id="comp-res" max="100" value="84"></progress></div>
+              </div>
+
+              <div class="status-row" id="colony-status">COLONY READY</div>
+            </div>
+          </aside>
+
+          <div class="panel events-panel" id="events-panel" aria-live="polite">
+            <div class="panel-header"><div class="label">EVENTS</div><h4>COLONY EVENTS</h4></div>
+            <div class="panel-body">
+              <button id="event-dust" class="btn small">DUST STORM</button>
+              <button id="event-solar" class="btn small">SOLAR FAILURE</button>
+              <button id="event-water" class="btn small">WATER DISCOVERY</button>
+              <div class="events-log monospace" id="colony-log">
+                09:01:00  HAB MODULE ONLINE
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <aside id="ai-console" class="ai-console" aria-hidden="true" aria-label="Mission AI">
+    <div class="ai-header">
+      <div class="label">MISSION AI // EDUCATIONAL SIMULATION</div>
+      <button id="close-ai" class="btn small" aria-label="Close AI">✕</button>
+    </div>
+    <div class="ai-body">
+      <div id="ai-log" class="ai-log" role="log" aria-live="polite"></div>
+      <form id="ai-form" class="ai-form" role="search" aria-label="Ask the mission AI">
+        <input id="ai-input" type="text" placeholder="Ask Mission AI — e.g., Can humans breathe on Mars?" aria-label="Mission AI question" />
+        <button class="btn primary" type="submit">ASK</button>
+      </form>
+    </div>
+  </aside>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-left">
+      <div class="logo-mini">MISSION MARS</div>
+      <small>Humanity's Next Giant Leap — Conceptual educational project — VERSION 1.0</small>
+    </div>
+    <div class="footer-links">
+      <a href="#page-mission">MISSION</a>
+      <a href="#page-explorer">EXPLORE</a>
+      <a href="#page-colony">COLONY 2050</a>
+      <span class="status-mini">SYSTEM STATUS: <strong id="footer-status">NOMINAL</strong></span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
